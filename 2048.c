@@ -50,7 +50,7 @@ void printbrd(){
 
 void lr(){                  //move from left to right y=0
     int i;
-    while()
+    
 }
 
 int main(){
