@@ -1,6 +1,7 @@
 //#define row 橫 horizontal X axis = j, 
 //#define column 直 vertical y axis = i
 //先 loop i, then j
+//fucking messing up with row and col
 
 #include<stdio.h>
 #include<time.h>
@@ -27,7 +28,7 @@ void intializebrd(){
     int count=0;
     for(i=0;i<3;i++){
         for(j=0;j<3;j++){
-            brd[i][j]=0;
+            brd[j][i]=0;
         }
     }
     //printf("x and y is %d %d \n", x, y);
@@ -75,6 +76,7 @@ void rightleft(){
                 save ++;
             }
         }
+        save = 0;
     }
 
     for(i=0;i<=3;i++){
