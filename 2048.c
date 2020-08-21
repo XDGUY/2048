@@ -38,25 +38,49 @@ void intializebrd(){
     }
 }
 
+void rl(){                  //move from right to left y=0
+    int i;
+    int save=0;
+    int savearr[4]={0};
+    /*for(i=0;i<=3;i++){
+        printf("%d", savearr[i]);
+    }*/
+    for(i=0;i<=3;i++){
+        if (checkbrd(i,0)){
+            savearr[save]=brd[i][0];
+            save++;
+        }
+    }
+    for(i=0;i<=3;i++){
+        printf("%d", savearr[i]);
+    }
+
+    for(i=0;i<=3;i++){
+        brd[i][0]=savearr[i];
+    }
+}
+
 void printbrd(){
     int i, j;
     for(i=0;i<4;i++){
         for(j=0;j<4;j++){
-            printf("%d ", brd[i][j]);
+            printf("%d ", brd[j][i]);
         }
         printf("\n");
     }
-}
-
-void lr(){                  //move from left to right y=0
-    int i;
-    bla;
 }
 
 int main(){
     int i, j;
     char userkey;
     intializebrd();
+    pushbrd(1, 0, 0);
+    pushbrd(3, 2, 0);
+    pushbrd(5, 3, 0);
+    printbrd();
+    printf("\n\n");
+    rl();
+    printf("\n");
     printbrd();
     /*printf("\n please input wasd to move");
     scanf("%c", &userkey);*/
