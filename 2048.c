@@ -140,7 +140,6 @@ void test(){
     combine_rl();
     mv_rl();
     printbrd();
-    enter
 }
 
 int main(){
