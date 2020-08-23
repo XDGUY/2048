@@ -2,17 +2,64 @@
 #include<time.h>
 #include<stdlib.h>
 
-int main(){
-    /*int r=0;
-    srand(time(NULL));
-    r = rand()%2;
-    printf("%d", r);*/
+int arr[4]={2,2,2,2};
+int savearr[4]={0,0,0,0};
+int save=0;
 
-    int arr[4]={0};
-    int nos[3]={0};
-    arr[2]=1;
-    nos[3]=2;
-    arr[2]=nos[3];
-    printf("arr[2]is %d, nos[3]is %d", arr[2], nos[3]);
+int ifnear(int first, int next){
+    if(first==next && first!=0){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int checknozero(int x){
+    if(arr[x]==0){
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+    
+}
+
+void combine(){
+    int i;
+    for(i=0;i<3;i++){
+        if(ifnear(arr[i], arr[i+1])){
+            arr[i]=arr[i]+arr[i+1];
+            arr[i+1]=0;
+        }
+    }
+}
+
+void moveit(){
+    int i;
+    for(i=0;i<=3;i++){
+        if(checknozero(i)){
+            arr[save]=arr[i];
+            save ++;    
+        }
+    }
+}
+
+void print(){
+    int i;
+    for(i=0;i<4;i++){
+        printf("%d", arr[i]);
+    }
+}
+
+int main(){
+    int i, j;
+    print();
+    combine();
+    printf("\n");
+    print();
+    moveit();
+    print();
     return 0;
 }

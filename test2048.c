@@ -32,10 +32,6 @@ int checkbrd(int x, int y){
     }
 }
 
-void intialize_all(int t){ //1 is inti brd, 2 is test brd, 3 is savearr
-    
-}
-
 void intializetestbrd(){
     int i, j;
     int n, x, y;
@@ -127,6 +123,10 @@ void combine_rl(){       //combine them in save array
     }*/
 }
 
+void combine_move_rl(){
+    
+}
+
 void printbrd(){
     int i, j;
     for(i=0;i<4;i++){
@@ -147,24 +147,31 @@ void printsavearr(){
     }
 }
 
-void test(){
-    pushbrd(2,2,0);
-    pushbrd(4,3,0);
-    printbrd();
-    rightleft();
-    intializetestbrd();
-    pushbrd(3, 2, 0);
-    pushbrd(5, 3, 0);
-    printf("\n");   
-    printbrd();
-    printf("\n");
-    rightleft();
-    printbrd();
-}
-
 int main(){
     int i, j;
     char userkey;
-    test();
+    intializetestbrd();
+    pushbrd(2, 0, 0);
+    pushbrd(2, 3, 0);
+    pushbrd(2, 2, 0);
+    pushbrd(2, 1, 0);
+    printf("this is printbrd after 2,2,2,2\n");
+    printbrd();
+    printf("\n this is rightleft\n");
+    rightleft();
+    printf("\n this is printbrd\n");
+    printbrd();
+    printf("this is combine_rl\n");
+    combine_rl();
+    printf("\n this is printbrd\n");
+    printbrd();
+    printf("this is printbrd\n");
+    printbrd();
+    printf("this is savearr\n");
+    printsavearr();
+    rightleft();
+    printbrd();
+    printf("\n");
+    printsavearr();
     return 0;
 }
