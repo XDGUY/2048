@@ -34,8 +34,8 @@ int checkbrd(int x, int y){  //cor
 
 void intializesavearr(){  //cor
     int i, j;
-    for(i=0;i<3;i++){
-        for(j=0;j<3;j++){
+    for(i=0;i<=3;i++){
+        for(j=0;j<=3;j++){
             savearr[j][i]=0;
         }
     }
@@ -45,8 +45,8 @@ void intializetestbrd(){  //cor
     int i, j;
     int n, x, y;
     int count=0;
-    for(i=0;i<3;i++){
-        for(j=0;j<3;j++){
+    for(i=0;i<=3;i++){
+        for(j=0;j<=3;j++){
             brd[j][i]=0;
         }
     }
@@ -128,10 +128,10 @@ void combine_rl(){
 }
 
 void test(){
-    pushbrd(2, 3, 0);
-    pushbrd(2, 1, 0);
-    pushbrd(2, 2, 0);
-    pushbrd(2, 0, 0);
+    pushbrd(4, 3, 1);
+    pushbrd(2, 1, 1);
+    pushbrd(8, 2, 1);
+    pushbrd(2, 0, 1);
     printbrd();
     enter
     mv_rl();
@@ -140,7 +140,7 @@ void test(){
     combine_rl();
     mv_rl();
     printbrd();
-    
+    enter
 }
 
 int main(){
