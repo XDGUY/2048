@@ -6,9 +6,10 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
-int brd[4][4];
-int savearr[4][4] = {0};
+int brd[4][4]={0};
+int savearr[4][4]={0};
 int save=0;
+int input[4][4];
 
 int pushbrd(int n, int x, int y){ //cor
     brd[x][y] = n;
@@ -29,6 +30,17 @@ int checkbrd(int x, int y){  //cor
     }
     else{
         return 1;
+    }
+}
+
+void inputbrd(){
+    int i, j;
+    int n;
+    for(i=0;i<=3;i++){
+        for(j=0;j<=3;j++){
+            scanf("%d", &n);
+            pushbrd(n, j, i);
+        }
     }
 }
 
@@ -83,6 +95,16 @@ void printbrd(){  //cor
     }
 }
 
+void printstrangebrd(){
+    int i, j;
+    for(i=0;i<4;i++){
+        for(j=0;j<4;j++){
+            printf("%d ", brd[j][i]);
+        }
+        printf("\n");
+    }
+}
+
 void printsavearr(){  //cor
     int i, j;
     for(i=0;i<4;i++){
@@ -127,18 +149,40 @@ void combine_rl(){
     }
 }
 
+void rotate_clockwise(){   //i:x   j: y
+    int i, j;
+    save = 0;
+    for(i=0;i<=3;i++){
+        for(j=3;j>=0;j--){
+            savearr[save][i]=brd[i][j];
+            save++;
+        }
+        save=0;
+    }
+    for(i=0;i<=3;i++){
+        for(j=0;j<=3;j++){
+            brd[j][i]=savearr[j][i];
+        }
+    }
+    intializesavearr();
+}
+
 void test(){
-    pushbrd(4, 3, 1);
-    pushbrd(2, 1, 1);
-    pushbrd(8, 2, 1);
-    pushbrd(2, 0, 1);
+    inputbrd();
+    enter
+    printbrd();
+    enter
+    rotate_clockwise();
     printbrd();
     enter
     mv_rl();
-    printbrd();
-    enter
     combine_rl();
     mv_rl();
+    printbrd();
+    enter
+    rotate_clockwise();
+    rotate_clockwise();
+    rotate_clockwise();
     printbrd();
 }
 

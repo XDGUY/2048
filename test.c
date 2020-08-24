@@ -53,13 +53,12 @@ void print(){
     }
 }
 
+void test(){
+    printf("%d", 3%4);
+}
+
 int main(){
     int i, j;
-    print();
-    combine();
-    printf("\n");
-    print();
-    moveit();
-    print();
+    test();
     return 0;
 }
