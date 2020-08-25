@@ -12,6 +12,7 @@ int brd[4][4]={0};
 int savearr[4][4]={0};
 int save=0;
 int input[4][4];
+enum{right_left, down, left_right, up};
 
 int pushbrd(int n, int x, int y){ //cor
     brd[x][y] = n;
@@ -157,7 +158,7 @@ void test(){
     intialize(brd);
     inputbrd();
     enter
-    slide(3);
+    slide(up);
     printarr(brd);
 }
 
