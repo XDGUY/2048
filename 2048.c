@@ -44,6 +44,15 @@ void inputbrd(){
     }
 }
 
+void intialize(int arrr[4][4]){
+    int i, j;
+    for(i=0;i<=3;i++){
+        for(j=0;j<=3;j++){
+            arrr[j][i]=0;
+        }
+    }
+}
+
 void intializesavearr(){  //cor
     int i, j;
     for(i=0;i<=3;i++){
@@ -168,21 +177,10 @@ void rotate_clockwise(){   //i:x   j: y
 }
 
 void test(){
+    intialize(brd);
     inputbrd();
-    enter
-    printbrd();
-    enter
-    rotate_clockwise();
-    printbrd();
-    enter
     mv_rl();
     combine_rl();
-    mv_rl();
-    printbrd();
-    enter
-    rotate_clockwise();
-    rotate_clockwise();
-    rotate_clockwise();
     printbrd();
 }
 
