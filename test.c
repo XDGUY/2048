@@ -1,6 +1,12 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
+/*
+  2 0 4 0   
+  8 2 0 4 
+  4 2 2 2
+  8 4 2 2
+  */
 
 int arr[4]={2,2,2,2};
 int savearr[4]={0,0,0,0};
@@ -54,7 +60,7 @@ void print(){
 }
 
 void test(){
-    printf("%d", 3%4);
+    printf("%d", 1/2);
 }
 
 int main(){

@@ -1,11 +1,13 @@
-//#define row 橫 horizontal X axis = j, 
-//#define column 直 vertical y axis = i
-//先 loop i, then j
-//fucking messing up with row and col
 #define enter printf("\n");
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
+
+//move up: rotateclockwise(3), mv_combine, clockwise(1)
+//move down: rotateclockwise(1), mv_combine, clockwise(3)
+//left to right rotateclockwise(2), mv_combine, clockwise(2)
+//25-8-2020
+
 int brd[4][4]={0};
 int savearr[4][4]={0};
 int save=0;
@@ -15,7 +17,7 @@ int pushbrd(int n, int x, int y){ //cor
     brd[x][y] = n;
 }
 
-int ifnear(int first, int next){  //cor
+int ifnear(int first, int next){  //cor //rl
     if(first==next && first!=0){
         return 1;
     }
@@ -53,26 +55,6 @@ void intialize(int arrr[4][4]){
     }
 }
 
-void intializesavearr(){  //cor
-    int i, j;
-    for(i=0;i<=3;i++){
-        for(j=0;j<=3;j++){
-            savearr[j][i]=0;
-        }
-    }
-}
-
-void intializetestbrd(){  //cor
-    int i, j;
-    int n, x, y;
-    int count=0;
-    for(i=0;i<=3;i++){
-        for(j=0;j<=3;j++){
-            brd[j][i]=0;
-        }
-    }
-}
-
 void intializebrd(){  //cor
     srand(time(NULL));
     int i, j;
@@ -94,31 +76,11 @@ void intializebrd(){  //cor
     }
 }
 
-void printbrd(){  //cor
+void printarr(int toprint[4][4]){
     int i, j;
     for(i=0;i<4;i++){
         for(j=0;j<4;j++){
-            printf("%d ", brd[j][i]);
-        }
-        printf("\n");
-    }
-}
-
-void printstrangebrd(){
-    int i, j;
-    for(i=0;i<4;i++){
-        for(j=0;j<4;j++){
-            printf("%d ", brd[j][i]);
-        }
-        printf("\n");
-    }
-}
-
-void printsavearr(){  //cor
-    int i, j;
-    for(i=0;i<4;i++){
-        for(j=0;j<4;j++){
-            printf("%d ", savearr[j][i]);
+            printf("%d ", toprint[j][i]);
         }
         printf("\n");
     }
@@ -142,14 +104,14 @@ void mv_rl(){   //seems correct
         }
     }
 
-    intializesavearr();
+    intialize(savearr);
 
 }
 
 void combine_rl(){
     int i, j;
     for(i=0;i<=3;i++){
-        for(j=0;j<=3;j++){
+        for(j=0;j<=3;j++){  
             if(ifnear(brd[j][i], brd[j+1][i])){
                 brd[j][i]=brd[j+1][i]+brd[j][i];
                 brd[j+1][i]=0;
@@ -158,30 +120,45 @@ void combine_rl(){
     }
 }
 
-void rotate_clockwise(){   //i:x   j: y
-    int i, j;
+void rotate_clockwise(int n){   //i:x   j: y  n: no. of times to rotate
+    int i, j, k;
     save = 0;
-    for(i=0;i<=3;i++){
-        for(j=3;j>=0;j--){
-            savearr[save][i]=brd[i][j];
-            save++;
+    for(k=0;k<n;k++){
+        for(i=0;i<=3;i++){
+            for(j=3;j>=0;j--){
+                savearr[save][i]=brd[i][j];
+                save++;
+            }
+            save=0;
         }
-        save=0;
-    }
-    for(i=0;i<=3;i++){
-        for(j=0;j<=3;j++){
-            brd[j][i]=savearr[j][i];
+    
+        for(i=0;i<=3;i++){
+            for(j=0;j<=3;j++){
+                brd[j][i]=savearr[j][i];
+            }
         }
+        intialize(savearr);
     }
-    intializesavearr();
+}
+
+void mv_combine_rl(){
+    mv_rl();
+    combine_rl();
+    mv_rl();
+}
+
+void slide(int direction){
+    rotate_clockwise(direction);
+    mv_combine_rl();
+    direction % 2 ? rotate_clockwise(direction+2) : rotate_clockwise(direction+4);
 }
 
 void test(){
     intialize(brd);
     inputbrd();
-    mv_rl();
-    combine_rl();
-    printbrd();
+    enter
+    slide(3);
+    printarr(brd);
 }
 
 int main(){
