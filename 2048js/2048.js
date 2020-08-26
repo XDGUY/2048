@@ -13,7 +13,7 @@ function setup(){
         [0,0,0,0]
     ];
     console.table(brd);
-    randomPush();
+    //randomPush();
     console.table(brd);
 }
 
@@ -40,15 +40,29 @@ function randomPush(){
     
 }
 
-function draw(){
-    background(255);
+function drawBrd(){
     let w=100;
+    pushbrd(2, 3, 0);
+    pushbrd(4, 2, 0);
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
             noFill();
             strokeWeight(2);
             stroke("#34be5b");
-            rect(i*w, j*w, w, w);
+            rect(j*w, i*w, w, w);
+            let val = brd[j][i];
+            if(!checkbrd(j,i)){
+                textAlign(CENTER, CENTER);
+                textSize(64);
+                fill(0);
+                noStroke();
+                text(val, j*w+w/2, i*w+w/2);
+            }
         }
     }
+}
+
+function draw(){
+    background(255);
+    drawBrd();
 }
