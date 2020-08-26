@@ -46,7 +46,7 @@ void intialize(int arrr[4][4]){
     }
 }
 
-void random_push(int no){
+void random_push(int no){  //func should be count
     int i;
     int n, x, y;
     int count=0;

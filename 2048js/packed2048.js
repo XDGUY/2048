@@ -1,16 +1,6 @@
-let brd=[
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0]
-];
+let brd;
 let save=0;
-let savearr= [
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0]
-];
+let savearr;
 const direction = {
     right_left: 0,
     down: 1,
@@ -26,26 +16,8 @@ function checkbrd(x, y){  //cor
     return brd[x][y]===0;
 }
 
-function ifNear(first, next){
-    if(first==next && first!==0){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-
 function getRandomInt(max){  //cor
     return Math.floor(Math.random()*Math.floor(max));
-}
-
-function initializeSavearr(){
-    savearr = [
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0]
-    ];
 }
 
 function setup(){  //cor
@@ -56,10 +28,15 @@ function setup(){  //cor
         [0,0,0,0],
         [0,0,0,0]
     ];
-    console.table(brd);
-    randomPush();
-    console.table(brd);
-    //console.log(ifNear(2, 2));
+}
+
+function initializeSavearr(){
+    savearr = [
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0]
+    ];
 }
 
 function randomPush(){  //cor
@@ -78,7 +55,6 @@ function randomPush(){  //cor
 }
 
 function mvRl(){
-    var save=0
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
             if(checkbrd(j, i)){
@@ -99,62 +75,10 @@ function mvRl(){
 
 }
 
-function combineRl(){
-    for(let i=0;i<=3;i++){
-        for(let j=0;j<=3;j++){  
-            if(ifNear(brd[j][i], brd[j+1][i])==1){
-                brd[j][i]=brd[j+1][i]+brd[j][i];
-                brd[j+1][i]=0;
-            }
-        }
-    }
-}
-
-function rotateClockwise(n){
-    save=0;
-    for(let k=0;k<n;k++){
-        for(let i=0;i<=3;i++){
-            for(let j=3;j>=0;j--){
-                savearr[save][i]=brd[i][j];
-                save++;
-            }
-            save=0;
-        }
-    
-        for(i=0;i<=3;i++){
-            for(j=0;j<=3;j++){
-                brd[j][i]=savearr[j][i];
-            }
-        }
-        initializeSavearr();
-    }
-}
-
-function mvCombineRl(){
-    mvRl();
-    combineRl();
-    mvRl();
-}
-
-function slide(dir){
-    rotateClockwise(dir);
-    mvCombineRl();
-    dir%2===1 ? rotateClockwise(dir+2) : rotateClockwise(dir+4);
-}
-
-function keyPressed(){
-    if(key == 'a'){
-        slide(0);
-    }
-}
-
 function drawBrd(){  //cor
     let w=100;
-    pushbrd(4, 3, 0);
+    pushbrd(2, 3, 0);
     pushbrd(4, 2, 0);
-    if(ifNear(4, 4)){
-        //console.log("hello")
-    }
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
             noFill();
