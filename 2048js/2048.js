@@ -16,7 +16,10 @@ const direction = {
     down: 1,
     left_right: 2,
     up: 3
-};
+};[0,0,0,0],
+[0,0,0,0],
+[0,0,0,0],
+[0,0,0,0]
 
 function pushbrd(n,x,y){  //cor
     brd[x][y]=n;
@@ -59,7 +62,7 @@ function setup(){  //cor
     console.table(brd);
     randomPush();
     console.table(brd);
-    //console.log(ifNear(2, 2));
+    keyPressed();
 }
 
 function randomPush(){  //cor
@@ -101,7 +104,7 @@ function mvRl(){
 
 function combineRl(){
     for(let i=0;i<=3;i++){
-        for(let j=0;j<=3;j++){  
+        for(let j=0;j<3;j++){  
             if(ifNear(brd[j][i], brd[j+1][i])==1){
                 brd[j][i]=brd[j+1][i]+brd[j][i];
                 brd[j+1][i]=0;
@@ -144,17 +147,15 @@ function slide(dir){
 
 function keyPressed(){
     if(key == 'a'){
+        pushbrd(2, 3, 0);
+        pushbrd(4, 2, 0);
         slide(0);
+        console.log(brd);
     }
 }
 
 function drawBrd(){  //cor
     let w=100;
-    pushbrd(4, 3, 0);
-    pushbrd(4, 2, 0);
-    if(ifNear(4, 4)){
-        //console.log("hello")
-    }
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
             noFill();
