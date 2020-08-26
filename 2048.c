@@ -19,21 +19,11 @@ int pushbrd(int n, int x, int y){ //cor
 }
 
 int ifnear(int first, int next){  //cor //rl
-    if(first==next && first!=0){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return first==next && first!=0;
 }
 
 int checkbrd(int x, int y){  //cor
-    if(brd[x][y]==0){
-        return 0;
-    }
-    else{
-        return 1;
-    }
+    return brd[x][y];
 }
 
 void inputbrd(){
@@ -53,6 +43,24 @@ void intialize(int arrr[4][4]){
         for(j=0;j<=3;j++){
             arrr[j][i]=0;
         }
+    }
+}
+
+void random_push(int no){
+    int i;
+    int n, x, y;
+    int count=0;
+    srand(time(NULL));
+    for(i=0;i<no;i++){
+        while(count!=2){
+            x=rand()%4;
+            y=rand()%4;
+            n=rand()%2;
+            if(!checkbrd(x,y)){
+                n ? pushbrd(2, x, y):pushbrd(4, x, y) ;
+                count++;
+            }
+    }
     }
 }
 
@@ -154,12 +162,39 @@ void slide(int direction){
     direction % 2 ? rotate_clockwise(direction+2) : rotate_clockwise(direction+4);
 }
 
+int endgame(){
+    int i, j, k;
+    int sum=0, sum2=0;
+    for(i=0;i<=3;i++){
+        for(j=0;j<=3;j++){
+            if(checkbrd(j,i)){
+                sum++;
+            }
+        }
+    }
+    for(k=0;k<=1;k++){
+        for(i=0;i<=3;i++){
+            for(j=0;j<=3;j++){
+                if(ifnear(brd[j][i], brd[j+1][i])){
+                    sum2++;
+                }
+            }
+            rotate_clockwise(1);
+        }
+    }
+    rotate_clockwise(4  );
+    if(sum2==0 && sum==16){
+        printf("gameover");
+        return 0;
+    }
+}
+
 void test(){
-    intialize(brd);
-    inputbrd();
-    enter
-    slide(up);
-    printarr(brd);
+    //intialize(brd);
+    //inputbrd();
+    //endgame();
+    //printarr(brd);
+    printf("\033[H");
 }
 
 int main(){
