@@ -130,11 +130,11 @@ function rotateClockwise(n){
     }
 }
 
-function mvCombineRl(){
+/*function mvCombineRl(){
     mvRl();
     combineRl();
     mvRl();
-}
+}*/
 
 function slide(dir){
     rotateClockwise(dir);

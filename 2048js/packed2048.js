@@ -19,9 +19,12 @@ function getRandomInt(max){  //cor
 function setup(){  //cor
     createCanvas(400, 400);
     brd = initialize();
-    pusharr(brd, 2, 3, 0);
-    pusharr(brd, 4, 2, 0);
-    pusharr(brd, 5, 1, 2)
+    brd=[
+        [2, 0, 4, 0],
+        [8, 2, 0, 4],
+        [4, 2, 2, 2],
+        [8, 4, 2, 2]
+    ]
     console.table(brd);
 }
 
@@ -56,22 +59,76 @@ function mvRl(RlArr){
         for(let j=0;j<=3;j++){
             if(!check(j,i,RlArr)){
                 pusharr(savearr,brd[j][i],save, i);
-                console.log("save b4 is" + save)
-                console.table(savearr);
                 save++;
-                console.log(save);
             }
         }
         save=0;
     }
-    console.table(RlArr);
-    console.table(savearr);
     return savearr;
+}
+
+function combineRl(comArr){
+    for(let i=0;i<=3;i++){
+        for(let j=0;j<3;j++){
+            if(ifNear(comArr[j+1][i], comArr[j][i])){
+                comArr[j][i]=comArr[j+1][i]+comArr[j][i];
+                comArr[j+1][i]=0;
+            }
+        }
+    }
+    return comArr;
+}
+
+function mvCombineRl(){  //mv combine array
+    brd=mvRl(brd);
+    brd=combineRl(brd);
+    brd=mvRl(brd);
+}
+
+function updateArray(fArr, sArr){  //copy firstarr to secondarr so sArr=fArr
+    for(let i=0;i<=3;i++){
+        for(let j=0;j<=3;j++){
+            sArr[j][i]=fArr[j][i];
+        }
+    }
+    return sArr;
+}
+
+function rotateClockwise(rotateArr, rTimes){  //rotate times
+    let rSave=0;
+    let rSaveArr=initialize();
+    for(let k=0;k<rTimes;k++){
+        for(let i=0;i<=3;i++){
+            for(let j=3;j>=0;j--){
+                rSaveArr[rSave][i]=rotateArr[i][j];
+                rSave++;
+            }
+            rSave=0;
+        }
+        rotateArr=updateArray(rSaveArr, rotateArr);
+        rSaveArr=initialize();
+    }
+    return rotateArr;
+}
+
+function slide(direction){
+    brd=rotateClockwise(brd, direction);
+    mvCombineRl();
+    brd= direction%2===1 ? rotateClockwise(brd, direction+2) : rotateClockwise(brd, direction+4);
 }
 
 function keyPressed(){
     if(key=='a'){
-        brd=mvRl(brd);
+        slide(0);
+    } else 
+    if(key=='s'){
+        slide(1);
+    } else
+    if(key=='d'){
+        slide(2);
+    } else
+    if(key=='w'){
+        slide(3);
     }
 }
 
