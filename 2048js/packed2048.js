@@ -16,15 +16,27 @@ function getRandomInt(max){  //cor
     return Math.floor(Math.random()*Math.floor(max));
 }
 
+function compare(a, b){
+    for(let i=0;i<=3;i++){
+        for(let j=0;j<=3;j++){
+            if(a[j][i]!==b[j][i]){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 function setup(){  //cor
     createCanvas(400, 400);
     brd = initialize();
-    brd=[
+    /*brd=[
         [2, 0, 4, 0],
         [8, 2, 0, 4],
         [4, 2, 2, 2],
         [8, 4, 2, 2]
-    ]
+    ]*/
+    randomPush(2);
     console.table(brd);
 }
 
@@ -118,17 +130,30 @@ function slide(direction){
 }
 
 function keyPressed(){
+    let slided=true;
+    let laststep=initialize();
     if(key=='a'){
+        laststep=(updateArray(brd, laststep));
         slide(0);
     } else 
     if(key=='s'){
+        laststep=(updateArray(brd, laststep));
         slide(1);
     } else
     if(key=='d'){
+        laststep=(updateArray(brd, laststep));
         slide(2);
     } else
     if(key=='w'){
+        laststep=(updateArray(brd, laststep));
         slide(3);
+    } else {
+        slided=false;
+    }
+    if(slided){
+        if((compare(brd, laststep))){
+            randomPush(1);
+        }
     }
 }
 
