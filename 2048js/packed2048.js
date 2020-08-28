@@ -9,7 +9,7 @@ function pusharr(pushArr, n, x, y){
 }
 
 function ifNear(first, next){
-    return first==next && first!==0;
+    return first===next && first!==0;
 }
 
 function getRandomInt(max){  //cor
@@ -31,10 +31,10 @@ function setup(){  //cor
     createCanvas(400, 400);
     brd = initialize();
     /*brd=[
-        [2, 0, 4, 0],
-        [8, 2, 0, 4],
-        [4, 2, 2, 2],
-        [8, 4, 2, 2]
+        [2, 4, 2, 4],
+        [4, 2, 4, 2],
+        [2, 4, 2, 4],
+        [4, 2, 4, 2]
     ]*/
     randomPush(2);
     console.table(brd);
@@ -129,22 +129,39 @@ function slide(direction){
     brd= direction%2===1 ? rotateClockwise(brd, direction+2) : rotateClockwise(brd, direction+4);
 }
 
+function endgame(){
+    for(let i=0;i<=3;i++){
+        for(let j=0;j<=3;j++){
+            if(check(j, i, brd)){
+                return false;
+            }
+            if(j!==3 && ifNear(brd[j][i], brd[j+1][i])){
+                return false;
+            }
+            if(i!==3 && ifNear(brd[j][i], brd[j][i+1])){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 function keyPressed(){
     let slided=true;
     let laststep=initialize();
-    if(key=='a'){
+    if(key=='a' || keyCode ===  LEFT_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(0);
     } else 
-    if(key=='s'){
+    if(key=='s' || keyCode ===  DOWN_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(1);
     } else
-    if(key=='d'){
+    if(key=='d' || keyCode ===  RIGHT_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(2);
     } else
-    if(key=='w'){
+    if(key=='w' || keyCode ===  UP_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(3);
     } else {
@@ -153,6 +170,9 @@ function keyPressed(){
     if(slided){
         if((compare(brd, laststep))){
             randomPush(1);
+        }
+        if(endgame()){
+            alert("Gameover, press F5 to restart");
         }
     }
 }
