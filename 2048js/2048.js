@@ -165,7 +165,7 @@ function drawBrd(){  //cor
                 textSize(64);
                 fill(0);
                 noStroke();
-                text(val, j*w+w/2, i*w+w/2);
+                text(i + ',' + j, j*w+w/2, i*w+w/2);
             }
         }
     }

@@ -21,6 +21,7 @@ function setup(){  //cor
     brd = initialize();
     pusharr(brd, 2, 3, 0);
     pusharr(brd, 4, 2, 0);
+    pusharr(brd, 5, 1, 2)
     console.table(brd);
 }
 
@@ -54,11 +55,14 @@ function mvRl(RlArr){
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
             if(!check(j,i,RlArr)){
-                savearr[save][i]=RlArr[j][i];
+                pusharr(savearr,brd[j][i],save, i);
+                console.log("save b4 is" + save)
+                console.table(savearr);
                 save++;
+                console.log(save);
             }
-            save=0;
         }
+        save=0;
     }
     console.table(RlArr);
     console.table(savearr);
@@ -85,6 +89,7 @@ function drawBrd(){  //cor
                 textSize(64);
                 fill(0);
                 noStroke();
+                //text(j + ',' + i, j*w+w/2, i*w+w/2);
                 text(val, j*w+w/2, i*w+w/2);
             }
         }
