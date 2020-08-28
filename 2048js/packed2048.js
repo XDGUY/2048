@@ -1,19 +1,15 @@
 let brd;
-let save=0;
-let savearr;
-const direction = {
-    right_left: 0,
-    down: 1,
-    left_right: 2,
-    up: 3
-};
 
-function pushbrd(n,x,y){  //cor
-    brd[x][y]=n;
+function check(x, y, arr){
+    return arr[x][y]===0;
 }
 
-function checkbrd(x, y){  //cor
-    return brd[x][y]===0;
+function pusharr(pushArr, n, x, y){
+    pushArr[x][y]=n;
+}
+
+function ifNear(first, next){
+    return first==next && first!==0;
 }
 
 function getRandomInt(max){  //cor
@@ -22,63 +18,61 @@ function getRandomInt(max){  //cor
 
 function setup(){  //cor
     createCanvas(400, 400);
-    brd = [
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0]
-    ];
+    brd = initialize();
+    pusharr(brd, 2, 3, 0);
+    pusharr(brd, 4, 2, 0);
+    console.table(brd);
 }
 
-function initializeSavearr(){
-    savearr = [
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0]
-    ];
+function initialize(){
+    return [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+      ];
 }
 
-function randomPush(){  //cor
+function randomPush(times){  //cor
     let n, x, y;
     var count=0;
-    while (count!=2) {
+    while (count<times) {
         x=getRandomInt(4);
         y=getRandomInt(4);
         n=random(1);
-        if(checkbrd(x,y)){
-            n<0.5 ? pushbrd(2, x, y) : pushbrd(4, x, y);
+        if(check(x, y, brd)){
+            n<0.5 ? pusharr(brd, 2, x, y) : pusharr(brd, 4, x, y);
             count++;
         }
     }
     
 }
 
-function mvRl(){
+function mvRl(RlArr){
+    let save=0;
+    let savearr=initialize();
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
-            if(checkbrd(j, i)){
-                savearr[save][i]=brd[j][i];
+            if(!check(j,i,RlArr)){
+                savearr[save][i]=RlArr[j][i];
                 save++;
             }
-        }
-        save=0;
-    }
-
-    for(i=0;i<=3;i++){
-        for(j=0;j<=3;j++){
-            brd[j][i]=savearr[j][i];
+            save=0;
         }
     }
+    console.table(RlArr);
+    console.table(savearr);
+    return savearr;
+}
 
-    initializeSavearr();
-
+function keyPressed(){
+    if(key=='a'){
+        brd=mvRl(brd);
+    }
 }
 
 function drawBrd(){  //cor
     let w=100;
-    pushbrd(2, 3, 0);
-    pushbrd(4, 2, 0);
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
             noFill();
@@ -86,7 +80,7 @@ function drawBrd(){  //cor
             stroke("#34be5b");
             rect(j*w, i*w, w, w);
             let val = brd[j][i];
-            if(!checkbrd(j,i)){
+            if(!check(j, i, brd)){
                 textAlign(CENTER, CENTER);
                 textSize(64);
                 fill(0);

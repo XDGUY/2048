@@ -16,10 +16,7 @@ const direction = {
     down: 1,
     left_right: 2,
     up: 3
-};[0,0,0,0],
-[0,0,0,0],
-[0,0,0,0],
-[0,0,0,0]
+};
 
 function pushbrd(n,x,y){  //cor
     brd[x][y]=n;
@@ -65,10 +62,10 @@ function setup(){  //cor
     keyPressed();
 }
 
-function randomPush(){  //cor
+function randomPush(times){  //cor
     let n, x, y;
     var count=0;
-    while (count!=2) {
+    while (count<times) {
         x=getRandomInt(4);
         y=getRandomInt(4);
         n=random(1);
