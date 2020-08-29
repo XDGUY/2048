@@ -154,7 +154,11 @@ function endgame(){
 
 function keyPressed(){
     let slided=true;
+    let ranPushed=false;
     let laststep=initialize();
+    if(endgame()){
+        alert("gameover, press F5 to restart");
+    }
     if(key=='a' || keyCode ===  LEFT_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(0);
@@ -176,13 +180,16 @@ function keyPressed(){
     if(slided){
         if((compare(brd, laststep))){
             randomPush(1);
+            ranPushed=true;
         }
-        endgame();
+        //endgame();
         //console.log(endgame());
-        if(endgame()){
-            alert("Gameover, press F5 to restart");
-        }
     }
+    /*if(ranPushed){
+        if(endgame()){
+            alert("gameover, press F5 to restart.");
+        }
+    }*/
 }
 
 function drawBrd(){  //cor
