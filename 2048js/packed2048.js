@@ -1,4 +1,6 @@
 let brd;
+let plsStop=false;
+let yRUDoingThis=false;
 
 function check(x, y, arr){
     return arr[x][y]===0;
@@ -156,9 +158,6 @@ function keyPressed(){
     let slided=true;
     let ranPushed=false;
     let laststep=initialize();
-    if(endgame()){
-        alert("gameover, press F5 to restart");
-    }
     if(key=='a' || keyCode ===  LEFT_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(0);
@@ -181,13 +180,14 @@ function keyPressed(){
         if((compare(brd, laststep))){
             randomPush(1);
             ranPushed=true;
+            console.table(brd);
         }
         //endgame();
         //console.log(endgame());
     }
     /*if(ranPushed){
         if(endgame()){
-            alert("gameover, press F5 to restart.");
+            console.log("gameover, press F5 to restart.");
         }
     }*/
 }
@@ -216,4 +216,11 @@ function drawBrd(){  //cor
 function draw(){  //cor
     background(255);
     drawBrd();
+    if(endgame() && !plsStop){
+        plsStop=true;
+    } else
+    if(plsStop && !yRUDoingThis){
+        yRUDoingThis=true;
+        alert("gameover, press F5 to restart")
+    }
 }
