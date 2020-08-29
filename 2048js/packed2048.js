@@ -31,10 +31,10 @@ function setup(){  //cor
     createCanvas(400, 400);
     brd = initialize();
     /*brd=[
-        [2, 4, 2, 4],
-        [4, 2, 4, 2],
-        [2, 4, 2, 4],
-        [4, 2, 4, 2]
+        [4, 2, 16, 4],
+        [2, 8, 2, 128],
+        [4, 64, 16, 8],
+        [0, 2, 4, 64]
     ]*/
     randomPush(2);
     console.table(brd);
@@ -132,15 +132,19 @@ function slide(direction){
 function endgame(){
     for(let i=0;i<=3;i++){
         for(let j=0;j<=3;j++){
-            if(check(j, i, brd)){
+            if((check(j, i, brd))){
                 return false;
             }
-            if(j!==3 && ifNear(brd[j][i], brd[j+1][i])){
+            if(j!==3 && brd[j][i]===brd[j+1][i]){
                 return false;
             }
-            if(i!==3 && ifNear(brd[j][i], brd[j][i+1])){
+            if(i!==3 && brd[j][i]===brd[j][i+1]){
                 return false;
             }
+            /*console.log("below is check if there is 0");
+            console.log(check(j, i,brd);
+            console.log("below is check if j can combine");
+            console.log("");*/
         }
     }
     return true;
@@ -171,6 +175,7 @@ function keyPressed(){
         if((compare(brd, laststep))){
             randomPush(1);
         }
+        console.log(endgame());
         if(endgame()){
             alert("Gameover, press F5 to restart");
         }
