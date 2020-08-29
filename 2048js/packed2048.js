@@ -31,10 +31,10 @@ function setup(){  //cor
     createCanvas(400, 400);
     brd = initialize();
     /*brd=[
-        [4, 2, 16, 4],
-        [2, 8, 2, 128],
-        [4, 64, 16, 8],
-        [0, 2, 4, 64]
+        [2, 8, 2, 8],
+        [4, 64, 16, 4],
+        [32, 4, 16, 2],
+        [4, 2, 16, 4]
     ]*/
     randomPush(2);
     console.table(brd);
@@ -134,17 +134,19 @@ function endgame(){
         for(let j=0;j<=3;j++){
             if((check(j, i, brd))){
                 return false;
-            }
+            } else
             if(j!==3 && brd[j][i]===brd[j+1][i]){
                 return false;
-            }
+            } else
             if(i!==3 && brd[j][i]===brd[j][i+1]){
                 return false;
             }
             /*console.log("below is check if there is 0");
-            console.log(check(j, i,brd);
+            console.log(check(j, i,brd));
             console.log("below is check if j can combine");
-            console.log("");*/
+            console.log(j!==3 && brd[j][i]===brd[j+1][i]);
+            console.log("below is check if i can combine");
+            console.log(i!==3 && brd[j][i]===brd[j][i+1]); */
         }
     }
     return true;
@@ -156,7 +158,7 @@ function keyPressed(){
     if(key=='a' || keyCode ===  LEFT_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(0);
-    } else 
+    } else
     if(key=='s' || keyCode ===  DOWN_ARROW){
         laststep=(updateArray(brd, laststep));
         slide(1);
@@ -175,10 +177,11 @@ function keyPressed(){
         if((compare(brd, laststep))){
             randomPush(1);
         }
+        endgame();
         console.log(endgame());
-        if(endgame()){
-            alert("Gameover, press F5 to restart");
-        }
+        /*if(endgame()){
+            //alert("Gameover, press F5 to restart");
+        }*/
     }
 }
 
