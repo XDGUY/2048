@@ -31,10 +31,10 @@ function setup(){  //cor
     createCanvas(400, 400);
     brd = initialize();
     /*brd=[
-        [2, 8, 2, 8],
-        [4, 64, 16, 4],
-        [32, 4, 16, 2],
-        [4, 2, 16, 4]
+        [4, 2, 16, 4],
+        [2, 8, 2, 128],
+        [4, 64, 16, 8],
+        [0, 2, 4, 64]
     ]*/
     randomPush(2);
     console.table(brd);
@@ -178,10 +178,10 @@ function keyPressed(){
             randomPush(1);
         }
         endgame();
-        console.log(endgame());
-        /*if(endgame()){
-            //alert("Gameover, press F5 to restart");
-        }*/
+        //console.log(endgame());
+        if(endgame()){
+            alert("Gameover, press F5 to restart");
+        }
     }
 }
 
