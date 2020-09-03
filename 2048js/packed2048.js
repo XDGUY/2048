@@ -1,6 +1,7 @@
 let brd;
 let plsStop=false;
 let yRUDoingThis=false;
+let score=0;
 
 function check(x, y, arr){
     return arr[x][y]===0;
@@ -31,6 +32,7 @@ function compare(a, b){
 
 function setup(){  //cor
     createCanvas(400, 400);
+    //noLoop();
     brd = initialize();
     /*brd=[
         [4, 2, 16, 4],
@@ -39,7 +41,8 @@ function setup(){  //cor
         [0, 2, 4, 64]
     ]*/
     randomPush(2);
-    console.table(brd);
+    updateScore();
+    //console.table(brd);
 }
 
 function initialize(){
@@ -85,6 +88,7 @@ function combineRl(comArr){
     for(let i=0;i<=3;i++){
         for(let j=0;j<3;j++){
             if(ifNear(comArr[j+1][i], comArr[j][i])){
+                score=score + comArr[j+1][i]+comArr[j][i];
                 comArr[j][i]=comArr[j+1][i]+comArr[j][i];
                 comArr[j+1][i]=0;
             }
@@ -154,42 +158,52 @@ function endgame(){
     return true;
 }
 
+function pressr(){
+    return key=='r';
+}
+
 function keyPressed(){
     let slided=true;
     let ranPushed=false;
     let laststep=initialize();
+    laststep=(updateArray(brd, laststep));
+    let undo=false;
     if(key=='a' || keyCode ===  LEFT_ARROW){
-        laststep=(updateArray(brd, laststep));
+        laststep=(updateArray(laststep, brd));
+        console.table(laststep);
         slide(0);
     } else
     if(key=='s' || keyCode ===  DOWN_ARROW){
         laststep=(updateArray(brd, laststep));
+        console.table(laststep);
         slide(1);
+        console.log("this is brd after slide");
+        console.table(brd);
+        console.table(laststep);
     } else
     if(key=='d' || keyCode ===  RIGHT_ARROW){
         laststep=(updateArray(brd, laststep));
+        console.table(laststep);
         slide(2);
+        console.log("this is brd after slide");
+        console.table(brd);
+        console.table(laststep);
     } else
     if(key=='w' || keyCode ===  UP_ARROW){
         laststep=(updateArray(brd, laststep));
+        console.table(laststep);
         slide(3);
+        console.log("this is brd after slide");
+        console.table(brd);
+        console.table(laststep);
     } else {
         slided=false;
     }
-    if(slided){
+    if(slided && !undo){
         if((compare(brd, laststep))){
             randomPush(1);
-            ranPushed=true;
-            console.table(brd);
         }
-        //endgame();
-        //console.log(endgame());
     }
-    /*if(ranPushed){
-        if(endgame()){
-            console.log("gameover, press F5 to restart.");
-        }
-    }*/
 }
 
 function drawBrd(){  //cor
@@ -213,9 +227,7 @@ function drawBrd(){  //cor
     }
 }
 
-function draw(){  //cor
-    background(255);
-    drawBrd();
+function daRealEnd(){
     if(endgame() && !plsStop){
         plsStop=true;
     } else
@@ -223,4 +235,16 @@ function draw(){  //cor
         yRUDoingThis=true;
         alert("gameover, press F5 to restart")
     }
+}
+
+function updateScore(){
+    select('#score').html(score);
+}
+
+function draw(){  //cor
+    background(255);
+    drawBrd();
+    daRealEnd();
+    //updateScore();
+    select('#score').html(score);
 }
