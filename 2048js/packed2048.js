@@ -46,7 +46,7 @@ function setup(){  //cor
 }
 
 function restartButton(){
-    if(confirm("Are you sure to restart the game? Your game progress will not be saved.")){
+    if(confirm("Are you sure you want to restart the game? Your game progress will not be saved.")){
         setup();
     }
 }
