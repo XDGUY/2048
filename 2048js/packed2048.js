@@ -162,18 +162,18 @@ function pressr(){
     return key=='r';
 }
 
-function keyPressed(){
+function bla(kek, ceckode){
     let slided=true;
     let ranPushed=false;
     let laststep=initialize();
     laststep=(updateArray(brd, laststep));
     let undo=false;
-    if(key=='a' || keyCode ===  LEFT_ARROW){
+    if(kek=='a' || ceckode ===  LEFT_ARROW){
         laststep=(updateArray(laststep, brd));
         console.table(laststep);
         slide(0);
     } else
-    if(key=='s' || keyCode ===  DOWN_ARROW){
+    if(kek=='s' || ceckode ===  DOWN_ARROW){
         laststep=(updateArray(brd, laststep));
         console.table(laststep);
         slide(1);
@@ -181,7 +181,7 @@ function keyPressed(){
         console.table(brd);
         console.table(laststep);
     } else
-    if(key=='d' || keyCode ===  RIGHT_ARROW){
+    if(kek=='d' || ceckode ===  RIGHT_ARROW){
         laststep=(updateArray(brd, laststep));
         console.table(laststep);
         slide(2);
@@ -189,7 +189,7 @@ function keyPressed(){
         console.table(brd);
         console.table(laststep);
     } else
-    if(key=='w' || keyCode ===  UP_ARROW){
+    if(kek=='w' || ceckode ===  UP_ARROW){
         laststep=(updateArray(brd, laststep));
         console.table(laststep);
         slide(3);
@@ -204,6 +204,10 @@ function keyPressed(){
             randomPush(1);
         }
     }
+}
+
+function keyPressed(){
+    bla(key, keyCode);
 }
 
 function drawBrd(){  //cor
