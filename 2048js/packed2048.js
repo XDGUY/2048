@@ -169,7 +169,7 @@ function pressr(){
     return key=='r';
 }
 
-function bla(kek, ceckode){
+function bla(kek, ceckode){ //Bullshit Language Assembly basic linear algorithm keypressed function wait to be called
     let slided=true;
     let ranPushed=false;
     let laststep=initialize();
