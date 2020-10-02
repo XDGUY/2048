@@ -179,6 +179,7 @@ function bla(kek, ceckode){
         laststep=(updateArray(laststep, brd));
         console.table(laststep);
         slide(0);
+        //document.getElementById("left").style.backgroundColor = "yellow";
     } else
     if(kek=='s' || ceckode ===  DOWN_ARROW){
         laststep=(updateArray(brd, laststep));
