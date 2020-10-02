@@ -48,6 +48,7 @@ function setup(){  //cor
 function restartButton(){
     if(confirm("Are you sure you want to restart the game? Your game progress will not be saved.")){
         setup();
+        score=0;
     }
 }
 
@@ -245,6 +246,7 @@ function daRealEnd(){
         yRUDoingThis=true;
         if(confirm("Gameover, Press ok to restart.")){
             setup();
+            score=0;
         }
     }
 }
