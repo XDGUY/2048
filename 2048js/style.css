@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+}
+
+p{
+    color:wheat;
+}
+
+i{
+    background-color:pink;
+    border-radius: 50%;
+}
+
+i:hover{
+    cursor:pointer;
+    background-color:yellow;
+}
+
+#up:active{
+    transform:translateY(-4px);
+}
+
+#down:active{
+    transform:translateY(4px);
+}
+
+#left:active{
+    transform:translateX(-4px);
+}
+
+#right:active{
+    transform:translateX(4px);
+}

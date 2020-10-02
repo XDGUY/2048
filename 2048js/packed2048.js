@@ -45,6 +45,12 @@ function setup(){  //cor
     //console.table(brd);
 }
 
+function restartButton(){
+    if(confirm("Are you sure to restart the game? Your game progress will not be saved.")){
+        setup();
+    }
+}
+
 function initialize(){
     return [
         [0, 0, 0, 0],
@@ -237,7 +243,9 @@ function daRealEnd(){
     } else
     if(plsStop && !yRUDoingThis){
         yRUDoingThis=true;
-        alert("gameover, press F5 to restart")
+        if(confirm("Gameover, Press ok to restart.")){
+            setup();
+        }
     }
 }
 
