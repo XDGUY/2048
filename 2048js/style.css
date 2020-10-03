@@ -35,3 +35,7 @@ i:hover{
 #right:active{
     transform:translateX(4px);
 }
+
+#undo{
+    color:#050801 ;
+}
