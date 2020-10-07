@@ -1,9 +1,10 @@
 body{
-    background-color:#050801;
+    background: linear-gradient(to bottom right, #FFE5D6, #FFD6F6);
 }
 
 p{
-    color:wheat;
+    color:#E8CBC3;
+    font-weight: bold;
 }
 
 i{
