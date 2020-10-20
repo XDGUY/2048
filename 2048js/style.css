@@ -19,6 +19,10 @@ i:hover{
                 0 0 25px yellow,
                 0 0 50px yellow,
                 0 0 25px yellow;
+    /*filter: drop-shadow(0 0 5px yellow)
+            drop-shadow(0 0 25px yellow)
+            drop-shadow(0 0 50px yellow)
+            drop-shadow(0 0 25px yellow);*/
 }
 
 #up:active{
